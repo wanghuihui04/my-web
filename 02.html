@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>校园系统注册</title>
+<style>
+body{background:url('school-logo.png') no-repeat center center fixed;background-size:cover;font-family:微软雅黑;}
+.box{width:450px;margin:80px auto;background:white;padding:40px;border-radius:10px;box-shadow:0 0 15px #ccc;opacity:0.95;}
+h2{text-align:center;color:#333;}
+.info{text-align:center;color:#666;margin-bottom:20px;}
+input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:6px;font-size:16px;}
+.btn{background:#409eff;color:white;border:none;cursor:pointer;font-weight:bold;}
+.btn:hover{background:#337ecc;}
+a{color:#409eff;text-decoration:none;}
+.img{text-align:center;margin-bottom:20px;}
+img{width:120px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="img">
+    <img src="school-logo1.png" alt="学校标识">
+  </div>
+  <h2>校园系统注册</h2>
+  <input type="text" placeholder="请输入学号">
+  <input type="text" placeholder="请输入姓名">
+  <input type="password" placeholder="请输入密码">
+  <input type="password" placeholder="确认密码">
+  <input type="button" class="btn" value="注册" onclick="validateRegister()">
+  <script>
+    function validateRegister() {
+      var studentId = document.querySelector('input[placeholder="请输入学号"]').value;
+      var name = document.querySelector('input[placeholder="请输入姓名"]').value;
+      var password = document.querySelector('input[placeholder="请输入密码"]').value;
+      var confirmPassword = document.querySelector('input[placeholder="确认密码"]').value;
+      
+      if (studentId === '') {
+        alert('学号不能为空！');
+        return;
+      }
+      
+      if (name === '') {
+        alert('姓名不能为空！');
+        return;
+      }
+      
+      if (password === '') {
+        alert('密码不能为空！');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('两次输入的密码不一致！');
+        return;
+      }
+      
+      // 保存注册信息到localStorage
+      var users = JSON.parse(localStorage.getItem('users') || '{}');
+      users[studentId] = {
+        name: name,
+        password: password
+      };
+      localStorage.setItem('users', JSON.stringify(users));
+      
+      alert('注册成功！');
+      window.location.href='index.html';
+    }
+  </script>
+  <div style="text-align:center;margin-top:15px;">
+    <a href="index.html">已有账号？去登录</a>
+  </div>
+</div>
+</body>
+</html>
